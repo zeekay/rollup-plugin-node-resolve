@@ -1,0 +1,50 @@
+{
+  "name": "rollup-plugin-node-resolve-magic",
+  "version": "0.1.4",
+  "description": "Rollup.js plugin which resolves third-party dependencies in node_modules",
+  "keywords": [
+    "commonjs",
+    "node_modules",
+    "npm",
+    "rollup-plugin"
+  ],
+  "author": "Zach Kelling <z@zeekay.io> (http://zeekay.io)",
+  "homepage": "https://github.com/zeekay/rollup-plugin-node-resolve-magic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeekay/rollup-plugin-node-resolve-magic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zeekay/rollup-plugin-node-resolve-magic/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/lib.js",
+  "module": "dist/lib.mjs",
+  "jsnext:main": "dist/lib.mjs",
+  "devDependencies": {
+    "cake-bundle": "0.1.0",
+    "cake-linked": "0.1.0",
+    "cake-outdated": "0.1.4",
+    "cake-publish": "0.1.5",
+    "cake-test": "0.1.0",
+    "cake-version": "0.1.9",
+    "coffee-script": "1.12.4",
+    "shortcake": "1.2.5"
+  },
+  "peerDependencies": {
+    "rollup": ">=0.34.1 <1"
+  },
+  "scripts": {
+    "build": "cake build",
+    "prepublish": "npm run build",
+    "pretest": "npm run build"
+  },
+  "dependencies": {
+    "browser-resolve": "1.11.2",
+    "builtin-modules": "1.1.1",
+    "resolve": "1.3.2"
+  }
+}
