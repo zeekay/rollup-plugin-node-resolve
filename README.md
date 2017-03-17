@@ -9,6 +9,8 @@ third party modules in `node_modules`. Differs in the following ways from
 - Prefers entry-module basedir as basedir for resolution (ideal for bundled
   apps, prevents duplication of shared modules).
 
+Originally developed as part of [Handroll](https://github.com/zeekay/handroll).
+
 ## Install
 ```bash
 $ npm install rollup-plugin-node-resolve-magic --save-dev
