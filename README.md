@@ -1,5 +1,7 @@
 # rollup-plugin-node-resolve-magic [![NPM version][npm-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url] [![Dependency Status][dependency-img]][dependency-url] [![Gitter chat][gitter-img]][gitter-url]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zeekay/rollup-plugin-node-resolve-magic.svg)](https://greenkeeper.io/)
+
 Locate modules using the [Node resolution
 algorithm](https://nodejs.org/api/modules.html#modules_all_together), for using
 third party modules in `node_modules`. Differs in the following ways from
