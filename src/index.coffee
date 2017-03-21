@@ -102,7 +102,7 @@ nodeResolveMagic = (opts = {}) ->
 
             resolve resolved
 
-nodeResolveMagic.browserResolve = browserResolve
-nodeResolveMagic.nodeResolve    = nodeResolve
+nodeResolveMagic.browser = browserResolve
+nodeResolveMagic.node    = nodeResolve
 
 export default nodeResolveMagic
