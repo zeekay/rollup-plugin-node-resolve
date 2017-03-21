@@ -9,7 +9,7 @@ COMMONJS_BROWSER_EMPTY = nodeResolve.sync 'browser-resolve/empty.js', __dirname
 ES6_BROWSER_EMPTY      = path.resolve __dirname, '../src/empty.js'
 
 
-export default (opts = {}) ->
+nodeResolveMagic = (opts = {}) ->
   basedir        = opts.basedir        ? null
   browser        = opts.browser        ? false
   extensions     = opts.extensions     ? ['.js', '.json', '.coffee', '.pug', '.styl']
@@ -101,3 +101,8 @@ export default (opts = {}) ->
             return reject err if err?
 
             resolve resolved
+
+nodeResolveMagic.browserResolve = browserResolve
+nodeResolveMagic.nodeResolve    = nodeResolve
+
+export default nodeResolveMagic
