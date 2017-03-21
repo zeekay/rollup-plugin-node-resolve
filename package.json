@@ -19,6 +19,8 @@
   },
   "license": "MIT",
   "files": [
+    "README.md",
+    "LICENSE",
     "dist/"
   ],
   "main": "dist/lib.js",
@@ -39,8 +41,8 @@
   },
   "scripts": {
     "build": "cake build",
-    "prepublish": "npm run build",
-    "pretest": "npm run build"
+    "prepublishOnly": "cake build",
+    "pretest": "cake build"
   },
   "dependencies": {
     "browser-resolve": "1.11.2",
