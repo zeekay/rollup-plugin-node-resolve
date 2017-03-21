@@ -17,6 +17,10 @@ export default (opts = {}) ->
   skip           = opts.skip           ? []
   external       = opts.external       ? true
 
+  if Array.isArray opts.external
+    external = false
+    skip     = skip.concat opts.external
+
   skip = new Set skip
 
   resolveId = if browser then browserResolve else nodeResolve
