@@ -33,7 +33,7 @@ nodeResolveMagic = (opts = {}) ->
     parts = importee.split /[\/\\]/
     id    = parts.shift()
 
-    basedir = opts.basedir ? path.dirname importer
+    basedir = opts.basedir ? path.dirname path.resolve importer
 
     if id[0] == '@' && parts.length
       # scoped packages
@@ -49,7 +49,8 @@ nodeResolveMagic = (opts = {}) ->
 
     new Promise (resolve, reject) ->
       _opts =
-        basedir:    basedir
+        basedir:    dirname importer
+        paths:      [basedir]
         extensions: extensions
         packageFilter: (pkg) ->
           # Try in order: 'module', 'jsnext:main' and 'main' fields.
@@ -66,11 +67,15 @@ nodeResolveMagic = (opts = {}) ->
           # likewise defer processing these (unless forced)
           if external == true and pkg.module?
             for k of pkg.dependencies
-              continue if skip.has k
-              console.log " - #{k}" + chalk.black " detected as external to #{pkg.name}"
               skip.add k
+              console.log " - #{k}" + chalk.black " detected as external to #{pkg.name}"
+            for k of pkg.peerDependencies
+              skip.add k
+              console.log " - #{k}" + chalk.black " detected as external to #{pkg.name}"
 
           pkg
+
+      console.log importee, importer, basedir
 
       resolveId importee, _opts, (err, resolved) ->
         return reject Error "Could not resolve '#{importee}' from #{path.normalize importer}" if err?
