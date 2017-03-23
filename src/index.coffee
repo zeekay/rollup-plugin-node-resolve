@@ -13,9 +13,9 @@ nodeResolveMagic = (opts = {}) ->
   basedir        = opts.basedir        ? null
   browser        = opts.browser        ? false
   extensions     = opts.extensions     ? ['.js', '.json', '.coffee', '.pug', '.styl']
+  external       = opts.external       ? true
   preferBuiltins = opts.preferBuiltins ? true
   skip           = opts.skip           ? []
-  external       = opts.external       ? true
 
   if Array.isArray opts.external
     external = false
@@ -25,6 +25,32 @@ nodeResolveMagic = (opts = {}) ->
 
   resolveId = if browser then browserResolve else nodeResolve
 
+  packageFilter = (pkg) ->
+    # Try in order: 'module', 'jsnext:main' and 'main' fields. Fall back to
+    # index.js if path to entry module is unspecified.
+    if pkg.module
+      pkg.main = pkg.module
+    else if pkg['jsnext:main']
+      pkg.main = pkg['jsnext:main']
+    unless pkg.main
+      pkg.main = './index.js'
+
+    # Automatically detect new externals based on package.json if opts.
+    # Typically a bundled library will only include dependencies which
+    # have not been processed into the build for some reason. We'll
+    # likewise defer processing these (unless forced)
+    if external == true and pkg.module?
+      for k of pkg.dependencies
+        continue if skip.has k
+        skip.add k
+        console.log " - #{k}" + chalk.black " detected as external to #{pkg.name}"
+      for k of pkg.peerDependencies
+        continue if skip.has k
+        skip.add k
+        console.log " - #{k}" + chalk.black " detected as external to #{pkg.name}"
+
+    pkg
+
   name: 'node-resolve-magic'
   resolveId: (importee, importer) ->
     return null if /\0/.test importee # Ignore IDs with null character, these belong to other plugins
@@ -33,51 +59,23 @@ nodeResolveMagic = (opts = {}) ->
     parts = importee.split /[\/\\]/
     id    = parts.shift()
 
-    basedir = opts.basedir ? path.dirname path.resolve importer
-
     if id[0] == '@' && parts.length
       # scoped packages
       id += "/#{parts.shift()}"
     else if id[0] == '.'
-      # An import relative to the parent dir of the importer, force basedir to
-      # match importer
-      basedir  = path.dirname importer
-      id       = path.resolve importer, '..', importee
-      relative = true
+      # An import relative to the parent dir of the importer
+      id = path.resolve importer, '..', importee
 
     return if skip.has id
 
     new Promise (resolve, reject) ->
-      _opts =
-        basedir:    dirname importer
-        paths:      [basedir]
-        extensions: extensions
-        packageFilter: (pkg) ->
-          # Try in order: 'module', 'jsnext:main' and 'main' fields.
-          if pkg.module
-            pkg.main = pkg.module
-          else if pkg['jsnext:main']
-            pkg.main = pkg['jsnext:main']
-          unless pkg.main
-            pkg.main = './index.js'
+      resolveOpts =
+        basedir:       path.dirname importer # Start resolution from importer dir
+        paths:         [basedir]             # Fallback to bundle root
+        extensions:    extensions
+        packageFilter: packageFilter
 
-          # Automatically detect new externals based on package.json if opts.
-          # Typically a bundled library will only include dependencies which
-          # have not been processed into the build for some reason. We'll
-          # likewise defer processing these (unless forced)
-          if external == true and pkg.module?
-            for k of pkg.dependencies
-              skip.add k
-              console.log " - #{k}" + chalk.black " detected as external to #{pkg.name}"
-            for k of pkg.peerDependencies
-              skip.add k
-              console.log " - #{k}" + chalk.black " detected as external to #{pkg.name}"
-
-          pkg
-
-      console.log importee, importer, basedir
-
-      resolveId importee, _opts, (err, resolved) ->
+      resolveId importee, resolveOpts, (err, resolved) ->
         return reject Error "Could not resolve '#{importee}' from #{path.normalize importer}" if err?
 
         # Empty modules?
