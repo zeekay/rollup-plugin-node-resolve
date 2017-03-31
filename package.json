@@ -19,13 +19,12 @@
   },
   "license": "MIT",
   "files": [
-    "README.md",
-    "LICENSE",
-    "dist/"
+    "lib/",
+    "src/"
   ],
-  "main": "dist/lib.js",
-  "module": "dist/lib.mjs",
-  "jsnext:main": "dist/lib.mjs",
+  "main": "lib/rollup-plugin-node-resolve-magic.js",
+  "module": "lib/rollup-plugin-node-resolve-magic.mjs",
+  "jsnext:main": "lib/rollup-plugin-node-resolve-magic.mjs",
   "devDependencies": {
     "cake-bundle": "0.2.9",
     "cake-linked": "0.1.0",
