@@ -14,8 +14,12 @@ nodeResolveMagic = (opts = {}) ->
   browser        = opts.browser        ? false
   extensions     = opts.extensions     ? ['.js', '.coffee', '.json']
   external       = opts.external       ? true
+  paths          = opts.paths          ? []
   preferBuiltins = opts.preferBuiltins ? true
   skip           = opts.skip           ? []
+
+  if basedir?
+    paths.push basedir
 
   if Array.isArray opts.external
     external = false
@@ -71,7 +75,7 @@ nodeResolveMagic = (opts = {}) ->
     new Promise (resolve, reject) ->
       resolveOpts =
         basedir:       path.dirname importer # Start resolution from importer dir
-        paths:         [basedir]             # Fallback to bundle root
+        paths:         paths                 # Fallback to paths
         extensions:    extensions
         packageFilter: packageFilter
 
