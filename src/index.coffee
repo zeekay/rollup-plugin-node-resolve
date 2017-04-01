@@ -12,7 +12,17 @@ ES6_BROWSER_EMPTY      = path.resolve __dirname, '../src/empty.js'
 nodeResolveMagic = (opts = {}) ->
   basedir        = opts.basedir        ? null
   browser        = opts.browser        ? false
-  extensions     = opts.extensions     ? ['.js', '.json', '.coffee', '.pug', '.styl']
+  extensions     = opts.extensions     ? [
+    '.coffee'
+    '.css'
+    '.html'
+    '.js'
+    '.json'
+    '.md'
+    '.pug'
+    '.styl'
+    '.txt'
+  ]
   external       = opts.external       ? true
   preferBuiltins = opts.preferBuiltins ? true
   skip           = opts.skip           ? []
@@ -76,7 +86,8 @@ nodeResolveMagic = (opts = {}) ->
         packageFilter: packageFilter
 
       resolveId importee, resolveOpts, (err, resolved) ->
-        return reject Error "Could not resolve '#{importee}' from #{path.normalize importer}" if err?
+        if err?
+          return reject new Error "Could not resolve '#{importee}' from #{path.normalize importer}"
 
         # Empty modules?
         if resolved == COMMONJS_BROWSER_EMPTY
