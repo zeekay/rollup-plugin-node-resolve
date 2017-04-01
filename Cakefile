@@ -8,7 +8,7 @@ use 'cake-test'
 use 'cake-version'
 
 task 'clean', 'clean project', ->
-  exec 'rm -rf dist'
+  exec 'rm -rf lib'
 
 task 'build', 'build project', ->
   bundle.write
