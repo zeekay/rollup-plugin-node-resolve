@@ -12,17 +12,7 @@ ES6_BROWSER_EMPTY      = path.resolve __dirname, '../src/empty.js'
 nodeResolveMagic = (opts = {}) ->
   basedir        = opts.basedir        ? null
   browser        = opts.browser        ? false
-  extensions     = opts.extensions     ? [
-    '.coffee'
-    '.css'
-    '.html'
-    '.js'
-    '.json'
-    '.md'
-    '.pug'
-    '.styl'
-    '.txt'
-  ]
+  extensions     = opts.extensions     ? ['.js', '.coffee', '.json']
   external       = opts.external       ? true
   preferBuiltins = opts.preferBuiltins ? true
   skip           = opts.skip           ? []
