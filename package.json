@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-node-resolve-magic",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Rollup.js plugin which resolves third-party dependencies in node_modules",
   "keywords": [
     "commonjs",
