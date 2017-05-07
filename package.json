@@ -32,6 +32,7 @@
     "sake-linked": "^0.1.2",
     "sake-outdated": "^0.1.27",
     "sake-publish": "^0.1.16",
+    "sake-test": "^0.1.5",
     "sake-version": "^0.1.19"
   },
   "peerDependencies": {
