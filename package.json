@@ -33,6 +33,7 @@
     "cake-test": "0.1.0",
     "cake-version": "0.1.15",
     "coffee-script": "1.12.4",
+    "sake-outdated": "^0.1.27",
     "shortcake": "1.2.8"
   },
   "peerDependencies": {
