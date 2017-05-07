@@ -74,8 +74,11 @@ nodeResolveMagic = (opts = {}) ->
 
     new Promise (resolve, reject) ->
       resolveOpts =
-        basedir:       path.dirname importer # Start resolution from importer dir
-        paths:         paths                 # Fallback to paths
+        # If this is a relative require, use the importer as the base,
+        # otherwise project basedir should be used to prevent unnecessary
+        # duplication of modules
+        basedir:       if importee[0] == '.' then path.dirname importer else basedir
+        paths:         paths
         extensions:    extensions
         packageFilter: packageFilter
 
