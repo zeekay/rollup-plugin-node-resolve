@@ -27,6 +27,7 @@
   "jsnext:main": "lib/rollup-plugin-node-resolve-magic.mjs",
   "devDependencies": {
     "coffee-script": "1.12.7",
+    "coffeescript": "^2.3.0",
     "sake-bundle": "^0.6.7",
     "sake-cli": "^0.7.2",
     "sake-linked": "^0.1.2",
