@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "browser-resolve": "1.11.2",
-    "builtin-modules": "2.0.0",
-    "chalk": "2.4.1",
+    "builtin-modules": "^2.0.0",
+    "chalk": "^2.4.1",
     "resolve": "1.7.1"
   }
 }
