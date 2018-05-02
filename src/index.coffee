@@ -32,7 +32,9 @@ nodeResolveMagic = (opts = {}) ->
   packageFilter = (pkg) ->
     # Try in order: 'module', 'jsnext:main' and 'main' fields. Fall back to
     # index.js if path to entry module is unspecified.
-    if pkg.module
+    if opts.browser and pkg.browser?
+      pkg.main = pkg.browser
+    else if pkg.module
       pkg.main = pkg.module
     else if pkg['jsnext:main']
       pkg.main = pkg['jsnext:main']
