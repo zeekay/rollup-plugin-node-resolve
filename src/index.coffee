@@ -1,9 +1,11 @@
 import fs             from 'fs'
 import path           from 'path'
-import builtins       from 'builtin-modules'
+
 import browserResolve from 'browser-resolve'
-import nodeResolve    from 'resolve'
+import builtins       from 'builtin-modules'
 import chalk          from 'chalk'
+import isObject       from 'es-is/object'
+import nodeResolve    from 'resolve'
 
 COMMONJS_BROWSER_EMPTY = nodeResolve.sync 'browser-resolve/empty.js', __dirname
 ES6_BROWSER_EMPTY      = path.resolve __dirname, '../src/empty.js'
@@ -32,7 +34,7 @@ nodeResolveMagic = (opts = {}) ->
   packageFilter = (pkg) ->
     # Try in order: 'module', 'jsnext:main' and 'main' fields. Fall back to
     # index.js if path to entry module is unspecified.
-    if opts.browser and pkg.browser?
+    if opts.browser and pkg.browser? and !isObject pkg.browser
       pkg.main = pkg.browser
     else if pkg.module
       pkg.main = pkg.module
