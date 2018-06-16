@@ -1,4 +1,6 @@
-# rollup-plugin-node-resolve-magic [![NPM version][npm-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url] [![Dependency Status][dependency-img]][dependency-url] [![Gitter chat][gitter-img]][gitter-url]
+# @zeekay/rollup-plugin-node-resolve
+
+[![NPM version][npm-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Coverage Status][coveralls-img]][coveralls-url] [![Dependency Status][dependency-img]][dependency-url] [![Gitter chat][gitter-img]][gitter-url]
 
 Locate modules using the [Node resolution
 algorithm](https://nodejs.org/api/modules.html#modules_all_together), for using
@@ -13,26 +15,28 @@ Originally developed as part of [Handroll](https://github.com/zeekay/handroll).
 
 ## Install
 ```bash
-$ npm install rollup-plugin-node-resolve-magic --save-dev
+$ npm install @zeekay/rollup-plugin-node-resolve --save-dev
 ```
 
 ## Usage
 Add the following code to your project's `rollup.config.js`:
 
 ```js
-import nodeResolve from 'rollup-plugin-node-resolve-magic';
+import resolve  from '@zeekay/rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 
 export default {
   entry: 'index.js',
   plugins: [
-    nodeResolve({
+    resolve({
       // defaults
       basedir:        path.dirname('index.js'),
       browser:        false,
       extensions:     ['.js', '.json', '.coffee', '.pug', '.styl'],
       preferBuiltins: true,
       skip:           []
-    })
+    }),
+    commonjs()
   ]
 };
 ```
@@ -50,6 +54,8 @@ MIT
 [npm-url]:        https://www.npmjs.com/package/rollup-plugin-node-resolve-magic
 [gitter-img]:     https://badges.gitter.im/join-chat.svg
 [gitter-url]:     https://gitter.im/zeekay/hi
+
+[rollup-plugin-node-resolve]: https://github.com/rollup/rollup-plugin-node-resolve
 
 <!-- not used -->
 [downloads-img]:     https://img.shields.io/npm/dm/rollup-plugin-node-resolve-magic.svg

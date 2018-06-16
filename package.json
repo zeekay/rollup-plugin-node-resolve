@@ -1,5 +1,5 @@
 {
-  "name": "rollup-plugin-node-resolve-magic",
+  "name": "@zeekay/rollup-plugin-node-resolve",
   "version": "0.2.11",
   "description": "Rollup.js plugin which resolves third-party dependencies in node_modules",
   "keywords": [
@@ -9,22 +9,22 @@
     "rollup-plugin"
   ],
   "author": "Zach Kelling <z@zeekay.io> (http://zeekay.io)",
-  "homepage": "https://github.com/zeekay/rollup-plugin-node-resolve-magic",
+  "homepage": "https://github.com/zeekay/rollup-plugin-node-resolve",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zeekay/rollup-plugin-node-resolve-magic.git"
+    "url": "https://github.com/zeekay/rollup-plugin-node-resolve.git"
   },
   "bugs": {
-    "url": "https://github.com/zeekay/rollup-plugin-node-resolve-magic/issues"
+    "url": "https://github.com/zeekay/rollup-plugin-node-resolve/issues"
   },
   "license": "MIT",
   "files": [
     "lib/",
     "src/"
   ],
-  "main": "lib/rollup-plugin-node-resolve-magic.js",
-  "module": "lib/rollup-plugin-node-resolve-magic.es.js",
-  "jsnext:main": "lib/rollup-plugin-node-resolve-magic.es.js",
+  "main": "lib/rollup-plugin-node-resolve.js",
+  "module": "lib/rollup-plugin-node-resolve.es.js",
+  "jsnext:main": "lib/rollup-plugin-node-resolve.es.js",
   "devDependencies": {
     "coffeescript": "^2.3.1",
     "es-is": "^3.3.10",
