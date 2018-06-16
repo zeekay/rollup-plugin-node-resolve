@@ -22,7 +22,7 @@
     "lib/",
     "src/"
   ],
-  "main": "lib/rollup-plugin-node-resolve.js",
+  "main": "lib/rollup-plugin-node-resolve.cjs.js",
   "module": "lib/rollup-plugin-node-resolve.es.js",
   "jsnext:main": "lib/rollup-plugin-node-resolve.es.js",
   "devDependencies": {
