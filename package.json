@@ -1,6 +1,6 @@
 {
   "name": "@zeekay/rollup-plugin-node-resolve",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "Rollup.js plugin which resolves third-party dependencies in node_modules",
   "keywords": [
     "commonjs",
